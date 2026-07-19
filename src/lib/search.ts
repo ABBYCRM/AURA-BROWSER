@@ -399,7 +399,7 @@ export async function runSearch(
     sources.push("Wikipedia skipped (commercial query)");
   }
 
-  // 4. HackerNews for tech queries (always — they never fail)
+  // 4. HackerNews as universal fallback (never fails, always useful)
   if (intent.isTech || results.length < 5) {
     const hn = await searchHackerNews(query, signal);
     if (hn.length) {

@@ -211,6 +211,26 @@ export function SearchResults({
           />
         )}
 
+        {/* "Web results unavailable" notice for verticals */}
+        {!loading && results.length === 0 && portals && portals.length > 0 && (
+          <div className="rounded-xl border border-ink-200 dark:border-ink-700 p-4 text-sm bg-ink-50 dark:bg-ink-900">
+            <div className="font-medium mb-1">Web results unavailable right now</div>
+            <div className="text-ink-500 text-xs mb-3">
+              Free search APIs are rate-limited. The top destinations above are the fastest way
+              to find what you're looking for. You can also open this search on a real search
+              engine directly.
+            </div>
+            <a
+              href={`https://duckduckgo.com/?q=${encodeURIComponent(query)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-md bg-accent-500 text-white hover:bg-accent-600"
+            >
+              Open on DuckDuckGo <Icon.External width={12} height={12} />
+            </a>
+          </div>
+        )}
+
         {/* Knowledge card */}
         {!loading && knowledge && (
           <KnowledgeCardPanel
