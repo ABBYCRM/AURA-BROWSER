@@ -418,7 +418,13 @@ export default function App() {
                   tabs.setSearchState(t.id, { results, knowledge, isLoading: false })
                 }
                 braveApiKey={settings.braveApiKey}
-                key={`${t.id}_${settings.braveApiKey || "free"}_${t.query}`}
+                nvidiaNimApiKey={settings.nvidiaNimApiKey}
+                nvidiaNimModel={settings.nvidiaNimModel}
+                enableAiAnswer={settings.enableAiAnswer}
+                onCitationClick={(url: string) => {
+                  openUrlInTab(url, domainOf(url));
+                }}
+                key={`${t.id}_${settings.braveApiKey || "free"}_${settings.nvidiaNimApiKey || "noai"}_${t.query}`}
               />
             )}
 

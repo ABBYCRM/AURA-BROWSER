@@ -12,6 +12,8 @@ const defaults: Settings = {
   theme: "system",
   showKnowledgeCard: true,
   enableCORSProxy: true,
+  nvidiaNimModel: "meta/llama-3.1-8b-instruct",
+  enableAiAnswer: true,
 };
 
 export function useSettings() {

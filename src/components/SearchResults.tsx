@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SearchBar } from "./SearchBar";
 import { ResultCard } from "./ResultCard";
 import { KnowledgeCardPanel } from "./KnowledgeCard";
+import { AIAnswerPanel } from "./AIAnswerPanel";
 import { Icon } from "./icons";
 import { runSearch } from "../lib/search";
 import type { SearchResult, KnowledgeCard, SavedItem } from "../types";
@@ -23,6 +24,10 @@ interface Props {
     knowledge: KnowledgeCard | null,
   ) => void;
   braveApiKey?: string;
+  nvidiaNimApiKey?: string;
+  nvidiaNimModel?: string;
+  enableAiAnswer?: boolean;
+  onCitationClick?: (url: string) => void;
 }
 
 type Filter = "all" | "web" | "wikipedia" | "news" | "topic";
@@ -40,6 +45,10 @@ export function SearchResults({
   initialKnowledge,
   onResultsLoaded,
   braveApiKey,
+  nvidiaNimApiKey,
+  nvidiaNimModel,
+  enableAiAnswer,
+  onCitationClick,
 }: Props) {
   const [results, setResults] = useState<SearchResult[]>(initialResults || []);
   const [knowledge, setKnowledge] = useState<KnowledgeCard | null>(
@@ -230,6 +239,16 @@ export function SearchResults({
             </a>
           </div>
         )}
+
+        {/* AI Answer panel — shows above knowledge card when enabled */}
+        <AIAnswerPanel
+          query={query}
+          results={results}
+          apiKey={nvidiaNimApiKey || ""}
+          model={nvidiaNimModel || "meta/llama-3.1-8b-instruct"}
+          enabled={!!enableAiAnswer}
+          onCitationClick={onCitationClick}
+        />
 
         {/* Knowledge card */}
         {!loading && knowledge && (

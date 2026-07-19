@@ -685,6 +685,52 @@ function SettingsPanel({
           </p>
         )}
       </div>
+      <div>
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-500 mb-2">
+          AI assistant
+        </h3>
+        <label className="flex items-center gap-2 text-xs text-ink-600 dark:text-ink-300 mb-1.5">
+          <input
+            type="checkbox"
+            checked={settings.enableAiAnswer !== false}
+            onChange={(e) => onUpdate("enableAiAnswer", e.target.checked)}
+            className="rounded"
+          />
+          Show AI Answer above web results
+        </label>
+        <p className="text-[10px] text-ink-500 mb-1.5 leading-relaxed">
+          Get a Llama 3.1 summary above your results — like Google's AI
+          Overviews. Get a free key at{" "}
+          <a
+            href="https://build.nvidia.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-600 dark:text-accent-400 underline"
+          >
+            build.nvidia.com
+          </a>
+          .
+        </p>
+        <input
+          type="password"
+          value={settings.nvidiaNimApiKey || ""}
+          onChange={(e) => onUpdate("nvidiaNimApiKey", e.target.value)}
+          placeholder="nvapi-xxxxxxxx (optional)"
+          className="w-full px-2 py-1.5 rounded-md border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 text-xs font-mono"
+        />
+        {settings.nvidiaNimApiKey && (
+          <p className="text-[10px] text-green-600 dark:text-green-400 mt-1">
+            ✓ NVIDIA NIM enabled
+          </p>
+        )}
+        <input
+          type="text"
+          value={settings.nvidiaNimModel || "meta/llama-3.1-8b-instruct"}
+          onChange={(e) => onUpdate("nvidiaNimModel", e.target.value)}
+          placeholder="model id"
+          className="w-full mt-1 px-2 py-1.5 rounded-md border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 text-xs font-mono"
+        />
+      </div>
     </div>
   );
 }

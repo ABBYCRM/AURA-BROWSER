@@ -1,5 +1,11 @@
 # DigitalOcean App Platform spec for AURA Browser
-# Deploy with: doctl apps create --spec .do/app.yaml
+#
+# Two components:
+#   - "aura"     — the static frontend (built from dist/)
+#   - "aura-api" — a tiny Express server that proxies NVIDIA NIM calls
+#
+# Both share the same repo/branch. Ingress routes /api/* to the service
+# and everything else to the static site.
 name: aura-browser
 region: nyc
 static_sites:
@@ -9,4 +15,21 @@ static_sites:
     build_command: npm ci && npm run build
     routes:
       - path: /
+        preserve_path_prefix: false
     catchall_document: index.html
+
+services:
+  - name: aura-api
+    source_dir: /
+    build_command: npm ci
+    run_command: npm run server
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    routes:
+      - path: /api
+    health_check:
+      http_path: /api/healthz
+    envs:
+      - key: NODE_VERSION
+        value: "22"

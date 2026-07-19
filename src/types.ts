@@ -119,4 +119,7 @@ export interface Settings {
   showKnowledgeCard: boolean;
   enableCORSProxy: boolean;
   braveApiKey?: string;
+  nvidiaNimApiKey?: string;
+  nvidiaNimModel?: string;
+  enableAiAnswer?: boolean;
 }
