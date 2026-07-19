@@ -656,6 +656,35 @@ function SettingsPanel({
           locally in your browser. Nothing is sent to a server.
         </p>
       </div>
+      <div>
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-500 mb-2">
+          Premium search
+        </h3>
+        <p className="text-[10px] text-ink-500 mb-1.5 leading-relaxed">
+          Free public search APIs are rate-limited and get blocked. Add a{" "}
+          <a
+            href="https://brave.com/search/api/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-600 dark:text-accent-400 underline"
+          >
+            Brave Search API key
+          </a>{" "}
+          for unlimited, reliable web results. Stored only in this browser.
+        </p>
+        <input
+          type="password"
+          value={settings.braveApiKey || ""}
+          onChange={(e) => onUpdate("braveApiKey", e.target.value)}
+          placeholder="BSA-xxxxxxxx (optional)"
+          className="w-full px-2 py-1.5 rounded-md border border-ink-200 dark:border-ink-700 bg-white dark:bg-ink-900 text-xs font-mono"
+        />
+        {settings.braveApiKey && (
+          <p className="text-[10px] text-green-600 dark:text-green-400 mt-1">
+            ✓ Brave Search enabled
+          </p>
+        )}
+      </div>
     </div>
   );
 }

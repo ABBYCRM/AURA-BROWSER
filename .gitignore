@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Test artifacts
+test_*.py
+fix-*.png
+live-screenshot.png
+verify_live.py
+screenshot-*.png
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

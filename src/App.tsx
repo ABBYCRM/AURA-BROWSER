@@ -417,6 +417,8 @@ export default function App() {
                 onResultsLoaded={(results, knowledge) =>
                   tabs.setSearchState(t.id, { results, knowledge, isLoading: false })
                 }
+                braveApiKey={settings.braveApiKey}
+                key={`${t.id}_${settings.braveApiKey || "free"}_${t.query}`}
               />
             )}
 

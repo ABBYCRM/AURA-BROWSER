@@ -118,4 +118,5 @@ export interface Settings {
   theme: "light" | "dark" | "system";
   showKnowledgeCard: boolean;
   enableCORSProxy: boolean;
+  braveApiKey?: string;
 }
